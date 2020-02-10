@@ -1,0 +1,5 @@
+[
+  { "site": "https://expired.badssl.com/", "selector": "#dashboard" },
+  { "site": "https://badssl.com/", "selector": "#dashboard" },
+  { "site": "https://google.com", "selector": "body" }
+]

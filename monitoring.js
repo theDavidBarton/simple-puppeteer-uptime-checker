@@ -8,6 +8,7 @@ const puppeteer = require('puppeteer')
 const request = require('request')
 
 async function monitoring(url, selector, browserWSEndpoint) {
+  const maxRetry = 5
   let browser
   let page
   let failed = false
@@ -18,20 +19,23 @@ async function monitoring(url, selector, browserWSEndpoint) {
     browser = await puppeteer.connect({ browserWSEndpoint })
     page = await browser.newPage()
     await page.setUserAgent('github.com/theDavidBarton/simple-puppeteer-uptime-checker')
-    const response = await page.goto(url)
-    responseCode = response.status()
+    for (let retry = 1; retry <= maxRetry; retry++) {
+      try {
+        const response = await page.goto(url)
+        responseCode = response.status()
+        failed = false
+        cause = 'unknown error'
+        break
+      } catch (e) {
+        failed = true
+        cause = e.name
+        console.log(`- ${url} retries after ${retry} unsuccessful attempt(s)`)
+      }
+    }
+    if (responseCode === 200) await page.waitForSelector(selector)
   } catch (e) {
     failed = true
     cause = e.name
-  }
-
-  if (responseCode === 200) {
-    try {
-      await page.waitForSelector(selector)
-    } catch (e) {
-      failed = true
-      cause = e.name
-    }
   }
 
   if (failed || responseCode !== 200) {

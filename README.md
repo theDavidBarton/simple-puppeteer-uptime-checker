@@ -35,4 +35,6 @@ By default you will need a `WEBHOOKS_URL` environment variable with the exact ur
 
 # License
 
-MIT
+MIT License
+
+Copyright (c) 2020 David Barton

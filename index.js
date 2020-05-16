@@ -1,8 +1,8 @@
 /*
-MIT License
-
-Copyright (c) 2020 David Barton
-*/
+ * _MIT License
+ *
+ * Copyright (c) 2020 David Barton
+ */
 
 const puppeteer = require('puppeteer')
 const monitoring = require('./monitoring')

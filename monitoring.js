@@ -1,8 +1,8 @@
 /*
- * _MIT License
- *
- * Copyright (c) 2020 David Barton
- */
+MIT License
+
+Copyright (c) 2020 David Barton
+*/
 
 const puppeteer = require('puppeteer')
 const request = require('request')
@@ -50,7 +50,7 @@ async function monitoring(url, selector, browserWSEndpoint) {
           text: `HEALTH CHECK *FAILED* on ${url} with HTTP ${responseCode} (${cause})`
         })
       },
-      function(e, resp, body) {
+      function (e, resp, body) {
         if (e) {
           console.error(e)
         }

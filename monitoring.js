@@ -1,8 +1,8 @@
 /*
- * _MIT License
- *
- * Copyright (c) 2020 David Barton
- */
+MIT License
+
+Copyright (c) 2020 David Barton
+*/
 
 const puppeteer = require('puppeteer')
 const request = require('request')

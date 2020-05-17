@@ -50,7 +50,7 @@ async function monitoring(url, selector, browserWSEndpoint) {
           text: `HEALTH CHECK *FAILED* on ${url} with HTTP ${responseCode} (${cause})`
         })
       },
-      function (e, resp, body) {
+      function(e, resp, body) {
         if (e) {
           console.error(e)
         }

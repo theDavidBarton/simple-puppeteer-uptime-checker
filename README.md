@@ -7,7 +7,7 @@ A simple uptime (site health) checker tool made with Puppeteer (headless Chrome)
 
 # Usage
 
-Fill the [siteConfig.json](./siteConfig.json) with the sites you want to monitor, and add one key element's selector as well per url.
+Fill the [siteConfig.json](./siteConfig.json) with the (1) sites you want to monitor, and (2) add one key element's [selector](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Selectors) as well per url (be careful using only `"body"`, as even error pages has a valid `<body>`).
 
 In this example the first site will throw an error due to bad ssl certificate:
 

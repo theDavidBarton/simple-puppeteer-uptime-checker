@@ -10,7 +10,7 @@ const siteConfig = require('./siteConfig.json')
 
 async function monitoringRunner() {
   const browser = await puppeteer.launch({ headless: true })
-  const browserWSEndpoint = await browser.wsEndpoint()
+  const browserWSEndpoint = browser.wsEndpoint()
 
   for (const siteData of siteConfig) {
     const site = siteData.site

@@ -1,7 +1,7 @@
 {
   "name": "simple-puppeteer-uptime-checker",
   "license": "MIT",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple uptime (site health) checker tool made with Puppeteer (headless Chrome).",
   "main": "src/index.js",
   "bin": "src/cli.js",

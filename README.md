@@ -57,11 +57,17 @@ $ source puppeteer-uptime.env
 **CLI usage:**
 
 ```bash
-simple-puppeteer-uptime-checker
+npx simple-puppeteer-uptime-checker
 ```
 
 ```bash
-simple-puppeteer-uptime-checker --slack
+npx simple-puppeteer-uptime-checker --slack
+```
+
+OR via Yarn:
+
+```bash
+yarn simple-puppeteer-uptime-checker
 ```
 
 **In app usage:**

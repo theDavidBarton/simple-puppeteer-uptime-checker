@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 const simpleUptimeCheck = require('./index');
 (async () => {
   await simpleUptimeCheck();

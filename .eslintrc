@@ -16,8 +16,8 @@
         "asyncArrow": "always"
       }
     ],
-    "max-len": [1, { "code": 120, "tabWidth": 4, "ignoreUrls": true, "ignoreComments": true, "ignoreStrings": true }],
-    "semi": [2, "never"],
+    "max-len": [1, { "code": 130, "tabWidth": 4, "ignoreUrls": true, "ignoreComments": true, "ignoreStrings": true }],
+    "semi": [1],
     "quotes": [2, "single"],
     "comma-dangle": [2, "never"],
     "object-curly-spacing": [2, "always"],

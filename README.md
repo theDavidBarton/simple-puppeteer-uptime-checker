@@ -7,7 +7,13 @@ A simple uptime (site health) checker tool made with Puppeteer (headless Chrome)
 
 # Usage
 
-Fill the [siteConfig.json](./siteConfig.json) with the (1) sites you want to monitor, and (2) add one key element's [selector](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Selectors) as well per url (be careful using only `"body"`, as even error pages has a valid `<body>`).
+## Install & setup
+
+```bash
+npm install simple-puppeteer-uptime-checker
+```
+
+Create a [site-config.json](./site-config.json) at the root of your Node.js project with the (1) sites you want to monitor, and (2) add one key element's [selector](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Selectors) as well per url (be careful using simply `"body"`, as even error pages has a valid `<body>` element).
 
 In this example the first site will throw an error due to bad ssl certificate:
 
@@ -19,10 +25,66 @@ In this example the first site will throw an error due to bad ssl certificate:
 ]
 ```
 
+### Notifications
+
+You can create notifications via (A) a [**Gmail**](https://www.google.com/gmail/) email address and/or (B) **Slack's** [**Incoming Webhooks**](https://api.slack.com/messaging/webhooks).  
+You can set which one to use with notification type (see in ['Run'](#run)).
+
+### Environment variables
+
+(1) touch an `puppeteer-uptime.env` file (gitignored) in the root folder.
+
+```bash
+# gmail credentials
+export GMAIL_ADDRESS="<your-email>@gmail.com"
+export GMAIL_PASSWORD="**************"
+export NOTIFICATION_EMAIL_ADDRESS="<notification-email>@<provider>"
+
+# slack webhooks
+export WEBHOOKS_URL="https://hooks.slack.com/services/*********/*********/************************"
+```
+
+(2) source the created file to local environment variables (depending on your platform you'll need to find a method which lasts more than the current session!):
+
+```bash
+$ source puppeteer-uptime.env
+```
+
 ## Run
 
+**Notification type** is the sole (optional) parameter: `'--none'`(default), `'--all'`, `'--slack'`, `'--email'`.
+
+**CLI usage:**
+
+```bash
+simple-puppeteer-uptime-checker
 ```
-$ node index.js
+
+```bash
+simple-puppeteer-uptime-checker --slack
+```
+
+**In app usage:**
+
+```javascript
+const simpleUptimeCheck = require('simple-puppeteer-uptime-checker');
+(async () => {
+  await simpleUptimeCheck();
+})();
+```
+
+_Note:_ In app function parameters have higher priority than cli arguments.
+
+```javascript
+const simpleUptimeCheck = require('simple-puppeteer-uptime-checker');
+(async () => {
+  await simpleUptimeCheck({ args: ['--slack'] });
+})();
+```
+
+**Output:**
+
+```bash
 HEALTH CHECK FAILED on https://expired.badssl.com/ with HTTP unknown status (Error)
 HEALTH CHECK PASSED on https://badssl.com/ with HTTP 200
 HEALTH CHECK PASSED on https://google.com with HTTP 200
@@ -32,12 +94,16 @@ HEALTH CHECK PASSED on https://google.com with HTTP 200
 
 You can run the script from a scheduled (cron) pipeline.
 
-## Notifications
+E.g. (gitHub Actions):
 
-By default you will need a `WEBHOOKS_URL` environment variable with the exact url as string to use it with Slack webhooks. But you can replace it with a [Nodemailer](https://nodemailer.com/about/) module if it fits your needs better. It can be set in [monitoring.js](./monitoring.js)
+```yml
+on:
+  schedule:
+    - cron: '20 9 * * 1-5'
+```
 
 # License
 
 MIT License
 
-Copyright (c) 2020 David Barton
+Copyright (c) 2021 David Barton

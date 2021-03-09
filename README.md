@@ -100,12 +100,26 @@ HEALTH CHECK PASSED on https://google.com with HTTP 200
 
 You can run the script from a scheduled (cron) pipeline.
 
-E.g. (gitHub Actions):
+E.g. (GitHub Actions):
 
 ```yml
+name: monitoring
 on:
   schedule:
-    - cron: '20 9 * * 1-5'
+    - cron: '20 23 * * *'
+jobs:
+  run-health-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Use Node.js 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: Install project
+        run: yarn
+      - name: Run health check
+        run: yarn simple-puppeteer-uptime-checker
 ```
 
 # License

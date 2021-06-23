@@ -23,14 +23,13 @@
 
 const nodemailer = require('nodemailer');
 const request = require('request');
-const missing = 'missing:\nhttps://github.com/theDavidBarton/simple-puppeteer-uptime-checker#environment-variables';
 
 /* You need to apply this on your gmail account: https://myaccount.google.com/lesssecureapps
  for required environment variables see docs: https://github.com/theDavidBarton/simple-puppeteer-uptime-checker#environment-variables */
 
 const email = msg => {
   if (!process.env.GMAIL_ADDRESS || !process.env.GMAIL_PASSWORD || !process.env.NOTIFICATION_EMAIL_ADDRESS) {
-    console.log('email environment variable ' + missing);
+    console.log('email environment variable is missing:\nhttps://github.com/theDavidBarton/simple-puppeteer-uptime-checker#environment-variables');
     process.exit(0);
   }
   const transporter = nodemailer.createTransport({
@@ -56,7 +55,7 @@ const email = msg => {
 
 const slack = msg => {
   if (!process.env.WEBHOOKS_URL) {
-    console.log('slack environment variable ' + missing);
+    console.log('slack environment variable is missing:\nhttps://github.com/theDavidBarton/simple-puppeteer-uptime-checker#environment-variables');
     process.exit(0);
   }
   slackOptions = {

@@ -73,19 +73,19 @@ yarn simple-puppeteer-uptime-checker
 **In app usage:**
 
 ```javascript
-const simpleUptimeCheck = require('simple-puppeteer-uptime-checker')
-;(async () => {
-  await simpleUptimeCheck()
-})()
+const simpleUptimeCheck = require('simple-puppeteer-uptime-checker');
+(async () => {
+  await simpleUptimeCheck();
+})();
 ```
 
 _Note:_ In app function parameters have higher priority than cli arguments.
 
 ```javascript
-const simpleUptimeCheck = require('simple-puppeteer-uptime-checker')
-;(async () => {
-  await simpleUptimeCheck({ args: ['--slack'] })
-})()
+const simpleUptimeCheck = require('simple-puppeteer-uptime-checker');
+(async () => {
+  await simpleUptimeCheck({ args: ['--slack'] });
+})();
 ```
 
 **Output:**

@@ -22,7 +22,7 @@
    SOFTWARE. */
 
 const nodemailer = require('nodemailer');
-const request = require('request');
+const https = require('https');
 
 /* You need to apply this on your gmail account: https://myaccount.google.com/lesssecureapps
  for required environment variables see docs: https://github.com/theDavidBarton/simple-puppeteer-uptime-checker#environment-variables */
@@ -58,18 +58,25 @@ const slack = msg => {
     console.log('slack environment variable is missing:\nhttps://github.com/theDavidBarton/simple-puppeteer-uptime-checker#environment-variables');
     process.exit(0);
   }
-  slackOptions = {
-    url: process.env.WEBHOOKS_URL,
+  let postData;
+  typeof(msg) === 'object' ? postData = JSON.stringify(msg) : postData = JSON.stringify({ text: msg });
+
+  const slackOptions  = {
     method: 'POST',
-    json: false,
-    body: JSON.stringify({
-      text: msg
-    })
+    hostname: 'hooks.slack.com',
+    path: process.env.WEBHOOKS_URL,
+    headers: { 'Content-Type': 'text/plain' },
+    maxRedirects: 4
   };
 
-  request(slackOptions, (e, resp, body) => {
-    if (e) console.error(e);
+  const req = https.request(slackOptions , res => {
+    const chunks = [];
+    res.on('data', chunk => chunks.push(chunk));
+    res.on('error', e => console.error(e));
   });
+
+  req.write(postData);
+  req.end();
 };
 
 module.exports = { email, slack };

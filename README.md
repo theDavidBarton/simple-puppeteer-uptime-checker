@@ -126,4 +126,4 @@ jobs:
 
 MIT License
 
-Copyright (c) 2021 David Barton
+Copyright (c) 2022 David Barton
